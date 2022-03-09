@@ -28,6 +28,18 @@ services:
       - 5601:5601
     networks:
       - observability
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:8.1.0-amd64
+    container_name: metricbeat
+    user: root
+    environment:
+      - logging.level=warn
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./beats/metric/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+    restart: on-failure
+    networks:
+      - observability
 
 volumes:
   elasticsearch_data:
