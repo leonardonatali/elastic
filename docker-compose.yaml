@@ -41,6 +41,18 @@ services:
     networks:
       - observability
 
+  heartbeat:
+    image: docker.elastic.co/beats/heartbeat:8.1.0-amd64
+    container_name: heartbeat
+    user: root
+    environment:
+      - setup.kibana.host=kibana:5601
+    volumes:
+      - ./beats/heartbeat/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml
+    restart: on-failure
+    networks:
+      - observability
+
 volumes:
   elasticsearch_data:
 
