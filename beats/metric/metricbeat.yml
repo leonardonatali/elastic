@@ -16,3 +16,5 @@ setup.kibana:
   host: "kibana:5601"
 
 setup.dashboards.enabled: true
+
+logging.level: warning
